@@ -1,0 +1,13 @@
+import atexit
+import os
+
+filename = '/home/grzesiek/.config/pythonrc'
+
+if filename and os.path.isfile(filename):
+    with open(filename) as fobj:
+        startup_file = fobj.read()
+    exec(startup_file)
+
+from tools import anki as ankitools
+anki_collection = ankitools.open_my_collection()
+atexit.register(anki_collection.close)
